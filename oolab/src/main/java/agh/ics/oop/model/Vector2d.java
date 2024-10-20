@@ -21,8 +21,8 @@ public class Vector2d {
         return y;
     }
 
-    public String toString(Vector2d vector) {
-        return "(" + vector.getX() + "," + vector.getY() + ")";
+    public String toString() {
+        return "(" + getX() + "," + getY() + ")";
     }
 
     public boolean precedes(Vector2d other) {
@@ -47,8 +47,8 @@ public class Vector2d {
     public Vector2d lowerLeft(Vector2d other) {
         return new Vector2d( min(x, other.getX() ), min(y , other.getY()));
     }
-    public Vector2d opposite(Vector2d other){
-        return new Vector2d(-other.getX(),-other.getY());
+    public Vector2d opposite(){
+        return new Vector2d(-getX(),-getY());
     }
     public boolean equals(Vector2d other){
         return x == other.getX() && y == other.getY(); // come back to this and review
