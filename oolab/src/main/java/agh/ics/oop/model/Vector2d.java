@@ -25,11 +25,19 @@ public class Vector2d {
         return "(" + getX() + "," + getY() + ")";
     }
 
-    public boolean precedes(Vector2d other) {
+    public boolean precedes(Vector2d other)
+    {
+        if(other == null){
+        return false;
+    }
         return x <= other.getX() && y <= other.getY();
     }
 
-    public boolean follows(Vector2d other) {
+    public boolean follows(Vector2d other)
+    {
+        if(other == null){
+            return false;
+        }
         return x >= other.getX() && y >= other.getY();
     }
 
@@ -51,9 +59,13 @@ public class Vector2d {
         return new Vector2d(-getX(),-getY());
     }
     public boolean equals(Vector2d other){
-        return x == other.getX() && y == other.getY(); // come back to this and review
-
+        if(other == null){
+            return false;
+        }
+        return this.x == other.getX() && this.y == other.getY();
     }
-
-
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }
