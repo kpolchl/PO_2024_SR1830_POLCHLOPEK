@@ -14,15 +14,15 @@ public enum MapDirection {
             case WEST -> "Zachód";
         };
     }
-        public MapDirection next(){
-            return switch(this){
-                case NORTH -> EAST;
-                case SOUTH -> WEST;
-                case EAST -> SOUTH;
-                case WEST -> NORTH;
+    public MapDirection next(){
+        return switch(this){
+            case NORTH -> EAST;
+            case SOUTH -> WEST;
+            case EAST -> SOUTH;
+            case WEST -> NORTH;
 
-            };
-        }
+        };
+    }
     public MapDirection previous(){
         return switch(this){
             case NORTH -> WEST;

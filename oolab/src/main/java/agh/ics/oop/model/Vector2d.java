@@ -1,5 +1,7 @@
 package agh.ics.oop.model;
 
+import java.util.Objects;
+
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
@@ -22,7 +24,7 @@ public class Vector2d {
     }
 
     public String toString() {
-        return "(" + getX() + "," + getY() + ")";
+        return "(" + this.x + "," + this.y + ")";
     }
 
     public boolean precedes(Vector2d other)
@@ -30,7 +32,7 @@ public class Vector2d {
         if(other == null){
         return false;
     }
-        return x <= other.getX() && y <= other.getY();
+        return this.x <= other.getX() && this.y <= other.getY();
     }
 
     public boolean follows(Vector2d other)
@@ -38,34 +40,35 @@ public class Vector2d {
         if(other == null){
             return false;
         }
-        return x >= other.getX() && y >= other.getY();
+        return this.x >= other.x && this.y >= other.y;
     }
 
     public Vector2d add(Vector2d other) {
-        return new Vector2d(x + other.getX(), y + other.getY());
+        return new Vector2d(this.x + other.getX(), this.y + other.getY());
     }
 
     public Vector2d subtract(Vector2d other) {
-        return new Vector2d(x - other.getX(), y - other.getY());
+        return new Vector2d(this.x - other.x, this.y - other.y);
     }
 
     public Vector2d upperRight(Vector2d other) {
-        return new Vector2d( max(x, other.getX() ), max(y , other.getY()));
+        return new Vector2d( max(this.x, other.x ), max(this.y , other.y));
     }
     public Vector2d lowerLeft(Vector2d other) {
-        return new Vector2d( min(x, other.getX() ), min(y , other.getY()));
+        return new Vector2d( min(this.x, other.x ), min(this.y , other.y));
     }
     public Vector2d opposite(){
-        return new Vector2d(-getX(),-getY());
+        return new Vector2d(-this.x,-this.y);
     }
     public boolean equals(Vector2d other){
         if(other == null){
             return false;
         }
-        return this.x == other.getX() && this.y == other.getY();
+        return this.x == other.x && this.y == other.y;
     }
+
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public int hashCode() {
+        return Objects.hash(this.x, this.y);
     }
 }
