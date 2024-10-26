@@ -60,6 +60,7 @@ public class Vector2d {
     public Vector2d opposite(){
         return new Vector2d(-this.x,-this.y);
     }
+    @Override
     public boolean equals(Vector2d other){
         if(other == null){
             return false;

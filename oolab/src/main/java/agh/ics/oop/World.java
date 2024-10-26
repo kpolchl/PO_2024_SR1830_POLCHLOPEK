@@ -22,6 +22,7 @@ public class World {
         MapDirection dir2 = MapDirection.EAST;
         System.out.println(dir2.previous());
 
+
     }
     static void run(String[] args){
         MoveDirection[] ParsedDirections = OptionsParser.parse(args);
