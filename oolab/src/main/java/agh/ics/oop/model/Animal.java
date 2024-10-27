@@ -12,6 +12,11 @@ public class Animal {
         this.direction = MapDirection.NORTH;
         this.coordinate = coordinate;
     }
+
+    public Vector2d getCoordinate() {
+        return coordinate;
+    }
+
     public String toString(){
         return "(" +coordinate.toString() + ", " + direction.toString() + ")";
     }

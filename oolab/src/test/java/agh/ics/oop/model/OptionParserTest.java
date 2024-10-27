@@ -3,26 +3,29 @@ package agh.ics.oop.model;
 import agh.ics.oop.OptionsParser;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import java.util.LinkedList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class OptionParserTest {
     @Test
     public void testparse() {
-        MoveDirection[] directions = new MoveDirection[]{MoveDirection.FORWARD, MoveDirection.BACKWARD, MoveDirection.LEFT, MoveDirection.RIGHT};
-        MoveDirection[] emptyDirections = new MoveDirection[]{};
+        List<MoveDirection> directions = List.of(MoveDirection.FORWARD, MoveDirection.BACKWARD, MoveDirection.LEFT, MoveDirection.RIGHT);
+        List<MoveDirection> emptyDirections = new LinkedList<>();
         String[] unparsedDirections = {"f","b","l","r"};
         String[] unparsedDirectionsWithErr = {"f","fasc","b","l","dssa","r","sds"};
         String[] allErr = {"fasc","dssa","sds"};
         String[] emptyconvert = {};
 
         //all good parse
-        assertArrayEquals(directions , OptionsParser.parse(unparsedDirections));
+        assertEquals(directions , OptionsParser.parse(unparsedDirections));
         // mixed parse
-        assertArrayEquals(directions , OptionsParser.parse(unparsedDirectionsWithErr));
+        assertEquals(directions , OptionsParser.parse(unparsedDirectionsWithErr));
         // all wrong parse
-        assertArrayEquals(emptyDirections , OptionsParser.parse(allErr));
+        assertEquals(emptyDirections , OptionsParser.parse(allErr));
         // empty convert
-        assertArrayEquals(emptyDirections , OptionsParser.parse(emptyconvert));
+        assertEquals(emptyDirections , OptionsParser.parse(emptyconvert));
 
     }
 }

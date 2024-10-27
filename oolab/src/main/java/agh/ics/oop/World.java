@@ -4,14 +4,11 @@ import agh.ics.oop.model.Animal;
 import agh.ics.oop.model.MapDirection;
 import agh.ics.oop.model.MoveDirection;
 import agh.ics.oop.model.Vector2d;
-
+import java.util.List;
 import java.net.NoRouteToHostException;
 
 public class World {
     public static void main(String[] args) {
-        System.out.println("system wystartował");
-        run(args);
-        System.out.println("system zakończył zadanie");
 
         // Animal manipulation
         Animal Monkey = new Animal();
@@ -23,24 +20,11 @@ public class World {
         Monkey.move(MoveDirection.FORWARD);
         Monkey.move(MoveDirection.FORWARD);
         System.out.println(Monkey);
+        List<MoveDirection> directions = OptionsParser.parse(args);
+        List<Vector2d> positions = List.of(new Vector2d(2,2), new Vector2d(3,4));
+        Simulation simulation = new Simulation(positions, directions);
+        simulation.run();
 
 
     }
-    static void run(String[] args){
-        MoveDirection[] ParsedDirections = OptionsParser.parse(args);
-
-        for(MoveDirection command : ParsedDirections){
-            switch (command) {
-                case FORWARD -> System.out.println("Jaszczur idzie w przodu");
-                case BACKWARD -> System.out.println("Jaszczur idzie do tyłu");
-                case RIGHT -> System.out.println("Jaszczur skręca w prawo");
-                case LEFT -> System.out.println("Jaszczur skręca w lewo");
-                default -> {
-                }
-
-            }
-
-        }
-    }
-
 }
