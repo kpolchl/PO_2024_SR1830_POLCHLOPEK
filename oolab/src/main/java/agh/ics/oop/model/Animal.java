@@ -15,10 +15,11 @@ public class Animal {
     public String toString(){
         return "(" +coordinate.toString() + ", " + direction.toString() + ")";
     }
-    private boolean isAt(Vector2d position)
-    {
+
+    private boolean isAt(Vector2d position) {
         return this.coordinate.equals(position);
     }
+
     private void swichDir(MapDirection direction){
         if (direction.equals(MapDirection.NORTH)) {
             this.direction = MapDirection.EAST;
@@ -27,20 +28,34 @@ public class Animal {
         }
     }
     private void goOne(MapDirection direction , Vector2d position ,MoveDirection move){
-        switch(direction){
-            case NORTH -> this.coordinate.add(new Vector2d(0,1));
-            case EAST -> this.coordinate.add(new Vector2d(1,0));
-            case SOUTH -> this.coordinate.add(new Vector2d(0,-1));
-            case WEST -> this.coordinate.add(new Vector2d(-1,0));
+        Vector2d temp = switch (direction){
+            case NORTH -> new Vector2d(0, move == MoveDirection.FORWARD ? 1:-1);
+            case EAST -> new Vector2d(move == MoveDirection.FORWARD ? 1:-1, 0);
+            case SOUTH -> new Vector2d(0, move == MoveDirection.FORWARD ? -1:1);
+            case WEST -> new Vector2d(move == MoveDirection.FORWARD ? -1:1, 0);
+        };
+        if (checkMapBorder(this.coordinate.add(temp))){
+            this.coordinate = this.coordinate.add(temp);
+        }
+        else{
+            //do notihing
         }
 
     }
-//    public void move(MoveDirection direction){
-//        switch(direction){
-//            case RIGHT  -> swichDir(this.direction);
-//            case LEFT -> swichDir(this.direction);
-//            case FORWARD ->
-//            case BACKWARD -> goOne(this.direction, this.coordinate);
-//        }
-//    }
+    private boolean checkMapBorder (Vector2d position){
+        if (position.getX() >=5 || position.getY() >=5 ){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    public void move(MoveDirection direction){
+        switch(direction){
+            case RIGHT  -> swichDir(this.direction);
+            case LEFT -> swichDir(this.direction);
+            case FORWARD -> goOne(this.direction,this.coordinate,MoveDirection.FORWARD);
+            case BACKWARD -> goOne(this.direction, this.coordinate, MoveDirection.BACKWARD);
+        }
+    }
 }
