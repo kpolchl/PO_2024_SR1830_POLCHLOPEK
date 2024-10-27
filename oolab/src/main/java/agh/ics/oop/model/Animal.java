@@ -10,11 +10,20 @@ public class Animal {
     }
     public Animal(Vector2d coordinate) {
         this.direction = MapDirection.NORTH;
-        this.coordinate = coordinate;
+        if (coordinate.getX() >4 || coordinate.getX() <-4 || coordinate.getY() >4 || coordinate.getY() <-4) {
+            throw new IllegalArgumentException("Animal outside map");
+        }
+        else{
+            this.coordinate = coordinate;
+        }
     }
 
     public Vector2d getCoordinate() {
         return coordinate;
+    }
+
+    public MapDirection getDirection() {
+        return direction;
     }
 
     public String toString(){
@@ -25,11 +34,29 @@ public class Animal {
         return this.coordinate.equals(position);
     }
 
-    private void swichDir(MapDirection direction){
-        if (direction.equals(MapDirection.NORTH)) {
-            this.direction = MapDirection.EAST;
-        } else{
-            this.direction = MapDirection.NORTH;
+    private void turnRight(MapDirection direction){
+       switch(direction){
+           case NORTH -> this.direction = MapDirection.EAST;
+           case EAST -> this.direction = MapDirection.SOUTH;
+           case SOUTH -> this.direction = MapDirection.WEST;
+           case WEST -> this.direction = MapDirection.NORTH;
+       }
+    }
+    private void turnLeft(MapDirection direction){
+        switch(direction){
+            case NORTH -> this.direction = MapDirection.WEST;
+            case EAST -> this.direction = MapDirection.NORTH;
+            case SOUTH -> this.direction = MapDirection.EAST;
+            case WEST -> this.direction = MapDirection.SOUTH;
+
+        }
+    }
+    private boolean checkMapBorder (Vector2d position){
+        if (position.getX() >=5 || position.getX() <=-5 || position.getY() >=5 || position.getY() <= -5 ){
+            return false;
+        }
+        else{
+            return true;
         }
     }
     private void goOne(MapDirection direction , Vector2d position ,MoveDirection move){
@@ -47,18 +74,10 @@ public class Animal {
         }
 
     }
-    private boolean checkMapBorder (Vector2d position){
-        if (position.getX() >=5 || position.getY() >=5 ){
-            return false;
-        }
-        else{
-            return true;
-        }
-    }
     public void move(MoveDirection direction){
         switch(direction){
-            case RIGHT  -> swichDir(this.direction);
-            case LEFT -> swichDir(this.direction);
+            case RIGHT  -> turnRight(this.direction);
+            case LEFT -> turnLeft(this.direction);
             case FORWARD -> goOne(this.direction,this.coordinate,MoveDirection.FORWARD);
             case BACKWARD -> goOne(this.direction, this.coordinate, MoveDirection.BACKWARD);
         }

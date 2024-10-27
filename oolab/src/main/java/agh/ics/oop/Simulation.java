@@ -18,6 +18,15 @@ public class Simulation {
             animalList.add(new Animal(coords));
         }
     }
+
+    public List<Animal> getAnimalList() {
+        return animalList;
+    }
+
+    public List<MoveDirection> getMoves() {
+        return moves;
+    }
+
     public void run(){
         int i =0;
         int N = animalList.size();
