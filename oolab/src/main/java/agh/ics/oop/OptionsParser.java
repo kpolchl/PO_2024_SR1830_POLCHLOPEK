@@ -7,6 +7,7 @@ import java.util.List;
 public class OptionsParser {
     public static List<MoveDirection> parse (String[] args ){
         List<MoveDirection> instructions = new LinkedList<>();
+        //linked lista bo szybciej się do niej dodaje 
         for (String arg : args) {
             switch (arg) {
                 case "f" -> instructions.add(MoveDirection.FORWARD);

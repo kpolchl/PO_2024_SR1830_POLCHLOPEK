@@ -1,5 +1,7 @@
 package agh.ics.oop.model;
 
+import java.util.Objects;
+
 public class Animal {
     private MapDirection direction;
     private Vector2d coordinate;
@@ -52,7 +54,7 @@ public class Animal {
         }
     }
     private boolean checkMapBorder (Vector2d position){
-        if (position.getX() >=5 || position.getX() <=-5 || position.getY() >=5 || position.getY() <= -5 ){
+        if (position.getX() >4 || position.getX() <-4 || position.getY() >4 || position.getY() <-4 ){
             return false;
         }
         else{

@@ -76,7 +76,7 @@ class SimulationTest {
 
         simulation.run();
 
-        assertEquals(simulation.getAnimalList().get(0).getCoordinate(), new Vector2d(0,0));
-        assertEquals(simulation.getAnimalList().get(0).getDirection(), MapDirection.NORTH);
+        assertEquals(simulation.getAnimalList().getFirst().getCoordinate(), new Vector2d(0,0));
+        assertEquals(simulation.getAnimalList().getFirst().getDirection(), MapDirection.NORTH);
     }
 }
