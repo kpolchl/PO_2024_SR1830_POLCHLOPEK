@@ -60,16 +60,17 @@ public class Vector2d {
     public Vector2d opposite(){
         return new Vector2d(-this.x,-this.y);
     }
+
     @Override
-    public boolean equals(Vector2d other){
-        if(other == null){
-            return false;
-        }
-        return this.x == other.x && this.y == other.y;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vector2d vector2d = (Vector2d) o;
+        return x == vector2d.x && y == vector2d.y;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.x, this.y);
+        return Objects.hash(x, y);
     }
 }
