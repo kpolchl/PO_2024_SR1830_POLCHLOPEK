@@ -9,7 +9,7 @@ import java.util.Set;
 import static java.lang.Math.abs;
 import static java.lang.Math.ceilDivExact;
 
-public class RectangularMap implements WorldMap {
+public class RectangularMap implements WorldMap<Animal,Vector2d> {
     private Map<Vector2d, Animal> animalPositions;
     private final int width;
     private final int height;
@@ -37,7 +37,7 @@ public class RectangularMap implements WorldMap {
     }
 
     @Override
-    public boolean place(Animal animal) {
+    public boolean place(Animal animal ) {
         if (canMoveTo(animal.getCoordinate())){
             animalPositions.put(animal.getCoordinate(), animal);
             return true;

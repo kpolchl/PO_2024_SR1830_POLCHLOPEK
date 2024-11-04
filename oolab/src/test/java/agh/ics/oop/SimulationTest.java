@@ -3,8 +3,6 @@ package agh.ics.oop;
 import agh.ics.oop.model.*;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -111,7 +109,7 @@ class SimulationTest {
 
         simulation.run();
 
-        assertEquals(simulation.getAnimalList().getFirst().getCoordinate(), new Vector2d(0,0));
-        assertEquals(simulation.getAnimalList().getFirst().getDirection(), MapDirection.NORTH);
+        assertEquals(simulation.getObjectlList().getFirst().getCoordinate(), new Vector2d(0,0));
+        assertEquals(simulation.getObjectlList().getFirst().getDirection(), MapDirection.NORTH);
     }
 }
