@@ -65,4 +65,8 @@ public class RectangularMap implements WorldMap<Animal,Vector2d> {
         return animalPositions.get(position);
     }
 
+    @Override
+    public Animal inicializeObject(Animal object) {
+        return null;
+    }
 }

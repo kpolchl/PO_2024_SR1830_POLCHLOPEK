@@ -43,4 +43,6 @@ public interface WorldMap<T ,P> extends MoveValidator<P> {
      * @return animal or null if the position is not occupied.
      */
     T objectAt(P position);
+
+    T inicializeObject(T object);
 }

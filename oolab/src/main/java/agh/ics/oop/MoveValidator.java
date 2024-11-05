@@ -13,3 +13,4 @@ public interface MoveValidator<P> {
      */
     boolean canMoveTo(P position);
 }
+
