@@ -3,16 +3,11 @@ package agh.ics.oop.model;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LinearMap implements WorldMap<String,Integer> {
-    private Map<Integer, String> stringPositions;
-    private Integer position;
-    private String name;
+public class LinearMap implements WorldMap<String, Integer> {
+    private Map<String, Integer> stringPositions;
 
-    public LinearMap(Integer position, String name) {
-        this.position = position;
-        this.name = name;
+    public LinearMap() {
         this.stringPositions = new HashMap<>();
-
     }
 
     @Override
@@ -22,51 +17,50 @@ public class LinearMap implements WorldMap<String,Integer> {
 
     @Override
     public boolean place(String object) {
-        stringPositions.put(stringPositions.size(), object);
+        stringPositions.put(object, stringPositions.size());
         return true;
     }
 
     @Override
     public void move(String object, MoveDirection direction) {
-        int stringkey =-1;
-        for(Integer key : stringPositions.keySet()) {
-            if (stringPositions.get(key).equals(object)){
-                stringkey = key;
-                break;
-            }
+        Integer previousPosition = stringPositions.get(object);
+
+        if (previousPosition == null) {
+            System.out.println("Object not found.");
+            return;
         }
-        if(direction==MoveDirection.LEFT || direction==MoveDirection.BACKWARD) {
-            if( canMoveTo(stringkey-1)){
-                stringPositions.put(stringkey-1, object);
-                stringPositions.remove(stringkey , object);
-                String string = stringPositions.get(stringkey-1);
-                stringPositions.put(stringkey, string);
-                stringPositions.remove(stringkey-1 , string);
 
-            }
-            else{
-                if( canMoveTo(stringkey-1)){
-                    stringPositions.put(stringkey-1, object);
-                    stringPositions.remove(stringkey , object);
-                    String string = stringPositions.get(stringkey-1);
-                    stringPositions.put(stringkey, string);
-                    stringPositions.remove(stringkey-1 , string);
-                }
-            }
-    }   }
+        int newPosition = (direction == MoveDirection.LEFT || direction == MoveDirection.BACKWARD)
+                ? previousPosition - 1 : previousPosition + 1;
 
+        if (canMoveTo(newPosition)) {
+            String otherObject = objectAt(newPosition);
+            stringPositions.put(object, newPosition);
+            stringPositions.remove(object, previousPosition);
+            stringPositions.put(otherObject, previousPosition);
+            stringPositions.remove(otherObject, newPosition);
+        }
+    }
     @Override
     public boolean isOccupied(Integer position) {
-        return stringPositions.containsKey(position);
+        // Check if any object occupies the given position
+        return stringPositions.containsValue(position);
     }
 
     @Override
     public String objectAt(Integer position) {
-        return stringPositions.get(position);
+        // Find which object is at the specified position
+        for (Map.Entry<String, Integer> entry : stringPositions.entrySet()) {
+            if (entry.getValue().equals(position)) {
+                return entry.getKey();
+            }
+        }
+        return null; // Return null if no object is at that position
     }
 
     @Override
     public boolean canMoveTo(Integer position) {
-        return position>=0 && position< stringPositions.size();
+        // Check if the position is within valid bounds
+        return position >= 0 && !stringPositions.containsValue(position);
     }
 }
