@@ -10,36 +10,35 @@ import java.util.List;
 import java.util.function.Function;
 
 public class Simulation<T,P> {
-    private List<T> objectlList;
+    private List<T> objectslList;
     private List<MoveDirection> moves;
     private WorldMap map;
-    private Function<P, T> objectCreator;
 
-    public Simulation(List<P> coordinates , List<MoveDirection> moves , WorldMap world , Function<P, T> objectCreator) {
-        this.objectlList = new ArrayList<>();
+    public Simulation(List<T> objects , List<MoveDirection> moves , WorldMap world) {
+        this.objectslList = objects;
         this.moves = moves;
         this.map = world;
-        for (P coords : coordinates) {
-            T object = objectCreator.apply(coords);
-            objectlList.add(object);
-            world.place(object);
+        for (T obj : objectslList) {
+            world.place(obj);
         }
     }
 
     public List<T> getObjectlList() {
-        return this.objectlList;
+        return this.objectslList;
     }
 
     public List<MoveDirection> getMoves() {
         return this.moves;
     }
 
+
+
     public void run(){
         System.out.println(map);
         int i =0;
-        int N = objectlList.size();
+        int N = objectslList.size();
         for (MoveDirection action : moves) {
-            map.move(objectlList.get(i), action);
+            map.move(objectslList.get(i), action);
             System.out.println(map);
             i = (i + 1) % N;
         }

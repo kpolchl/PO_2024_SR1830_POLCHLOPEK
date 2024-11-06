@@ -44,5 +44,4 @@ public interface WorldMap<T ,P> extends MoveValidator<P> {
      */
     T objectAt(P position);
 
-    T inicializeObject(T object);
 }
