@@ -7,37 +7,38 @@ import agh.ics.oop.model.WorldMap;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
-public class Simulation {
-    private List<Animal> animalList;
+public class Simulation<T,P> {
+    private List<T> objectslList;
     private List<MoveDirection> moves;
     private WorldMap map;
 
-    public Simulation(List<Vector2d> coordinates , List<MoveDirection> moves , WorldMap world) {
-        this.animalList = new ArrayList<>();
+    public Simulation(List<T> objects , List<MoveDirection> moves , WorldMap world) {
+        this.objectslList = objects;
         this.moves = moves;
         this.map = world;
-        for (Vector2d coords : coordinates) {
-            Animal animal = new Animal(coords);
-            animalList.add(animal);
-            world.place(animal);
+        for (T obj : objectslList) {
+            world.place(obj);
         }
     }
 
-    public List<Animal> getAnimalList() {
-        return animalList;
+    public List<T> getObjectlList() {
+        return this.objectslList;
     }
 
     public List<MoveDirection> getMoves() {
-        return moves;
+        return this.moves;
     }
+
+
 
     public void run(){
         System.out.println(map);
         int i =0;
-        int N = animalList.size();
+        int N = objectslList.size();
         for (MoveDirection action : moves) {
-            map.move(animalList.get(i), action);
+            map.move(objectslList.get(i), action);
             System.out.println(map);
             i = (i + 1) % N;
         }
