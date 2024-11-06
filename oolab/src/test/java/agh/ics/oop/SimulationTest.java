@@ -25,7 +25,7 @@ class SimulationTest {
         map.place(animal);
         map.move(animal, MoveDirection.FORWARD);
 
-        assertEquals(animal.getCoordinate(), new Vector2d(2, 3));
+        assertEquals(animal.getPosition(), new Vector2d(2, 3));
         assertEquals(animal.getDirection(), MapDirection.NORTH);
     }
 
@@ -37,7 +37,7 @@ class SimulationTest {
         map.place(animal);
         map.move(animal, MoveDirection.BACKWARD);
 
-        assertEquals(animal.getCoordinate(), new Vector2d(2, 1));
+        assertEquals(animal.getPosition(), new Vector2d(2, 1));
         assertEquals(animal.getDirection(), MapDirection.NORTH);
     }
 
@@ -49,7 +49,7 @@ class SimulationTest {
         map.place(animal);
         map.move(animal, MoveDirection.LEFT);
 
-        assertEquals(animal.getCoordinate(), new Vector2d(2, 2));
+        assertEquals(animal.getPosition(), new Vector2d(2, 2));
         assertEquals(animal.getDirection(), MapDirection.WEST);
     }
 
@@ -62,7 +62,7 @@ class SimulationTest {
         map.move(animal, MoveDirection.RIGHT);
 
 
-        assertEquals(animal.getCoordinate(), new Vector2d(2, 2));
+        assertEquals(animal.getPosition(), new Vector2d(2, 2));
         assertEquals(animal.getDirection(), MapDirection.EAST);
     }
 
@@ -76,7 +76,7 @@ class SimulationTest {
 
 
 
-        assertEquals(animal.getCoordinate(), new Vector2d(4, 4));
+        assertEquals(animal.getPosition(), new Vector2d(4, 4));
     }
 
     @Test
@@ -90,7 +90,7 @@ class SimulationTest {
 
         map.move(animal, MoveDirection.FORWARD);
 
-        assertEquals(monkey.getCoordinate(), new Vector2d(2, 1));
+        assertEquals(monkey.getPosition(), new Vector2d(2, 1));
     }
     @Test
     void getAnimalAtPosition() {
@@ -111,7 +111,7 @@ class SimulationTest {
 
         simulation.run();
 
-        assertEquals(simulation.getAnimalList().getFirst().getCoordinate(), new Vector2d(0,0));
+        assertEquals(simulation.getAnimalList().getFirst().getPosition(), new Vector2d(0,0));
         assertEquals(simulation.getAnimalList().getFirst().getDirection(), MapDirection.NORTH);
     }
 }

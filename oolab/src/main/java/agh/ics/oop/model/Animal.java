@@ -5,7 +5,7 @@ import agh.ics.oop.MoveValidator;
 import java.util.Objects;
 import java.util.function.Function;
 
-public class Animal {
+public class Animal implements WorldElement {
     private MapDirection direction;
     private Vector2d coordinate;
 
@@ -19,7 +19,7 @@ public class Animal {
 
     }
 
-    public Vector2d getCoordinate() {
+    public Vector2d getPosition() {
         return this.coordinate;
     }
 
