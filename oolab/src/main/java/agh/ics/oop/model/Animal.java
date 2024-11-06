@@ -1,6 +1,9 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.MoveValidator;
+
 import java.util.Objects;
+import java.util.function.Function;
 
 public class Animal {
     private MapDirection direction;
@@ -12,24 +15,20 @@ public class Animal {
     }
     public Animal(Vector2d coordinate) {
         this.direction = MapDirection.NORTH;
-        if (coordinate.getX() >4 || coordinate.getX() <-4 || coordinate.getY() >4 || coordinate.getY() <-4) {
-            throw new IllegalArgumentException("Animal outside map");
-        }
-        else{
-            this.coordinate = coordinate;
-        }
+        this.coordinate = coordinate;
+
     }
 
     public Vector2d getCoordinate() {
-        return coordinate;
+        return this.coordinate;
     }
 
     public MapDirection getDirection() {
-        return direction;
+        return this.direction;
     }
 
     public String toString(){
-        return "(" +coordinate.toString() + ", " + direction.toString() + ")";
+        return  this.direction.toString() ;
     }
 
     private boolean isAt(Vector2d position) {
@@ -53,22 +52,14 @@ public class Animal {
 
         }
     }
-    private boolean checkMapBorder (Vector2d position){
-        if (position.getX() >4 || position.getX() <-4 || position.getY() >4 || position.getY() <-4 ){
-            return false;
-        }
-        else{
-            return true;
-        }
-    }
-    private void goOne(MapDirection direction , Vector2d position ,MoveDirection move){
+    private void goOne(MapDirection direction , Vector2d position ,MoveDirection move, Function<Vector2d , Boolean> canMoveTo ){
         Vector2d temp = switch (direction){
             case NORTH -> new Vector2d(0, move == MoveDirection.FORWARD ? 1:-1);
             case EAST -> new Vector2d(move == MoveDirection.FORWARD ? 1:-1, 0);
             case SOUTH -> new Vector2d(0, move == MoveDirection.FORWARD ? -1:1);
             case WEST -> new Vector2d(move == MoveDirection.FORWARD ? -1:1, 0);
         };
-        if (checkMapBorder(this.coordinate.add(temp))){
+        if (canMoveTo.apply(this.coordinate.add(temp))){
             this.coordinate = this.coordinate.add(temp);
         }
         else{
@@ -76,12 +67,12 @@ public class Animal {
         }
 
     }
-    public void move(MoveDirection direction){
+    public void move(MoveDirection direction , Function<Vector2d , Boolean> canMoveTo){
         switch(direction){
             case RIGHT  -> turnRight(this.direction);
             case LEFT -> turnLeft(this.direction);
-            case FORWARD -> goOne(this.direction,this.coordinate,MoveDirection.FORWARD);
-            case BACKWARD -> goOne(this.direction, this.coordinate, MoveDirection.BACKWARD);
+            case FORWARD -> goOne(this.direction,this.coordinate,MoveDirection.FORWARD, canMoveTo);
+            case BACKWARD -> goOne(this.direction, this.coordinate, MoveDirection.BACKWARD, canMoveTo);
         }
     }
 }
