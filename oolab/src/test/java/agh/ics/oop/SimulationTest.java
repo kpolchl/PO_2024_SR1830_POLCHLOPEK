@@ -1,10 +1,9 @@
 package agh.ics.oop;
 
 import agh.ics.oop.model.*;
+import agh.ics.oop.model.util.IncorrectPositionException;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +17,7 @@ class SimulationTest {
     }
 
     @Test
-    void checkAnimalMoveForward() {
+    void checkAnimalMoveForward() throws IncorrectPositionException {
         WorldMap map = new RectangularMap(5, 5);
         Animal animal = new Animal();
 
@@ -30,7 +29,7 @@ class SimulationTest {
     }
 
     @Test
-    void checkAnimalMoveBackward() {
+    void checkAnimalMoveBackward() throws IncorrectPositionException {
         WorldMap map = new RectangularMap(5, 5);
         Animal animal = new Animal();
 
@@ -42,7 +41,7 @@ class SimulationTest {
     }
 
     @Test
-    void checkAnimalMoveLeft() {
+    void checkAnimalMoveLeft() throws IncorrectPositionException {
         WorldMap map = new RectangularMap(5, 5);
         Animal animal = new Animal();
 
@@ -54,7 +53,7 @@ class SimulationTest {
     }
 
     @Test
-    void checkAnimalMoveRight() {
+    void checkAnimalMoveRight() throws IncorrectPositionException {
         WorldMap map = new RectangularMap(5, 5);
         Animal animal = new Animal();
 
@@ -67,7 +66,7 @@ class SimulationTest {
     }
 
     @Test
-    void animalMovesOutsideMap() {
+    void animalMovesOutsideMap() throws IncorrectPositionException {
         WorldMap map = new RectangularMap(5, 5);
         Animal animal = new Animal(new Vector2d(4, 4));
 
@@ -80,7 +79,7 @@ class SimulationTest {
     }
 
     @Test
-    void cannotMoveToSpaceOccupiedByDiffAnimal() {
+    void cannotMoveToSpaceOccupiedByDiffAnimal() throws IncorrectPositionException {
         WorldMap map = new RectangularMap(5, 5);
         Animal animal = new Animal(new Vector2d(2, 2));
         Animal monkey = new Animal(new Vector2d(2, 1));
@@ -93,7 +92,7 @@ class SimulationTest {
         assertEquals(monkey.getPosition(), new Vector2d(2, 1));
     }
     @Test
-    void getAnimalAtPosition() {
+    void getAnimalAtPosition() throws IncorrectPositionException {
         WorldMap map = new RectangularMap(5, 5);
         Animal animal = new Animal(new Vector2d(2, 2));
 
