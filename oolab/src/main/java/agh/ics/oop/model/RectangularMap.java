@@ -1,5 +1,7 @@
 package agh.ics.oop.model;
 
+import agh.ics.oop.model.util.Boundary;
+
 public class RectangularMap extends AbstractWorldMap {
 
     public RectangularMap(int width, int height) {
@@ -9,9 +11,8 @@ public class RectangularMap extends AbstractWorldMap {
     }
 
     @Override
-    public String toString() {
-        return visualizer.draw(MINCORD, MAXCORD);
+    public Boundary getCurrentBounds() {
+        return new Boundary(MINCORD, MAXCORD);
     }
-
 
 }

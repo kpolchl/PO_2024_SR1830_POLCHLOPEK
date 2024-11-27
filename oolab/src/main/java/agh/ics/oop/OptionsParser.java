@@ -14,11 +14,9 @@ public class OptionsParser {
                 case "b" -> instructions.add(MoveDirection.BACKWARD);
                 case "l" -> instructions.add(MoveDirection.LEFT);
                 case "r" -> instructions.add(MoveDirection.RIGHT);
-                default -> { //do nothing if different arg
+                default -> throw new IllegalArgumentException(arg + " is not a valid argument");
                 }
             }
-
-        }
         return instructions;
     }
 }

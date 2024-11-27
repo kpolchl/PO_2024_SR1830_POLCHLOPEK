@@ -21,9 +21,9 @@ public class OptionParserTest {
         //all good parse
         assertEquals(directions , OptionsParser.parse(unparsedDirections));
         // mixed parse
-        assertEquals(directions , OptionsParser.parse(unparsedDirectionsWithErr));
-        // all wrong parse
-        assertEquals(emptyDirections , OptionsParser.parse(allErr));
+        Throwable exception1 = assertThrows(IllegalArgumentException.class, () -> OptionsParser.parse(unparsedDirectionsWithErr));
+        // all wrong parse\
+        Throwable exception2 = assertThrows(IllegalArgumentException.class, () -> OptionsParser.parse(allErr));
         // empty convert
         assertEquals(emptyDirections , OptionsParser.parse(emptyconvert));
 
