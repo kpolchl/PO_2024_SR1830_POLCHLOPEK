@@ -5,16 +5,18 @@ import agh.ics.oop.model.util.Boundary;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import static java.lang.Math.sqrt;
 
 public class GrassField extends AbstractWorldMap {
     public int numberOfGrass;
     private final Map<Vector2d , Grass> grassMap;
-
+    private final UUID ID;
 
     public GrassField(int numberOfGrass) {
         this.grassMap = new HashMap<>();
+        this.ID = UUID.randomUUID();
         RandomPositionGenerator randomPositionGenerator = new RandomPositionGenerator((int) sqrt(numberOfGrass*10), (int) sqrt(numberOfGrass*10), numberOfGrass);
         for(Vector2d grassPosition : randomPositionGenerator) {
             grassMap.put(grassPosition, new Grass(grassPosition));
@@ -56,6 +58,11 @@ public class GrassField extends AbstractWorldMap {
             minmap = minmap.lowerLeft(v);
         }
         return new Boundary(minmap, maxmap);
+    }
+
+    @Override
+    public UUID getId() {
+        return ID;
     }
 
 }
