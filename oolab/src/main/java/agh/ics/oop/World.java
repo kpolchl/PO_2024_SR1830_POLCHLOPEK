@@ -6,7 +6,7 @@ import java.util.List;
 import java.net.NoRouteToHostException;
 
 public class World {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Animal animal = new Animal();
         List<MoveDirection> directions = null;
         try {
@@ -15,10 +15,20 @@ public class World {
             e.printStackTrace();
         }
         List<Vector2d> positions = List.of(new Vector2d(1, 1), new Vector2d(1, 2));
-        AbstractWorldMap world = new GrassField(10);
-        world.addObserver(new ConsoleMapObserver());
-        Simulation simulation = new Simulation(positions, directions, world);
-        simulation.run();
+        AbstractWorldMap recWorld = new GrassField(10);
+        AbstractWorldMap grassWorld = new RectangularMap(5,5);
+        recWorld.addObserver(new ConsoleMapObserver());
+        grassWorld.addObserver(new ConsoleMapObserver());
+
+        Simulation recSimulation = new Simulation(positions, directions, grassWorld);
+        Simulation grassSimulation = new Simulation(positions, directions, recWorld);
+
+        SimulationEngine simEng = new SimulationEngine(List.of(recSimulation, grassSimulation));
+        for( int i =0 ;i<100; i++){
+            simEng.runAsync();
+        }
+
+        System.out.println("system zakończył zadanie");
 
 
     }
