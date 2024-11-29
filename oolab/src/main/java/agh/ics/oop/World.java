@@ -23,9 +23,9 @@ public class World {
         Simulation recSimulation = new Simulation(positions, directions, grassWorld);
         Simulation grassSimulation = new Simulation(positions, directions, recWorld);
 
-        SimulationEngine simEng = new SimulationEngine(List.of(recSimulation, grassSimulation));
-        for( int i =0 ;i<100; i++){
-            simEng.runAsync();
+        SimulationEngine simEng = new SimulationEngine(List.of(recSimulation ));
+        for( int i =0 ;i<1000; i++){
+            simEng.runAsyncInThreadPool();
         }
 
         System.out.println("system zakończył zadanie");

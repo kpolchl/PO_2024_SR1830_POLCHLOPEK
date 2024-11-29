@@ -7,8 +7,8 @@ public class ConsoleMapObserver implements MapChangeListener {
 
     @Override
     public void mapChanged(WorldMap worldMap, String message) {
-        String logchange = "Change %s %s \n ID %s";
-        System.out.println(String.format(logchange, changeCount++, message, worldMap.getId()));
+        String log = "Change %s %s \n ID %s";
+        System.out.println(String.format(log, changeCount++, message, worldMap.getId()));
         System.out.println(worldMap);
     }
 }
