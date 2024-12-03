@@ -6,7 +6,7 @@ import agh.ics.oop.model.util.IncorrectPositionException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Simulation {
+public class Simulation{
     private List<Animal> animalList;
     private List<MoveDirection> moves;
     private WorldMap map;

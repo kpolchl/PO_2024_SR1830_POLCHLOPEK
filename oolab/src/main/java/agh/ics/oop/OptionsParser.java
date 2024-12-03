@@ -14,7 +14,7 @@ public class OptionsParser {
                 case "b" -> instructions.add(MoveDirection.BACKWARD);
                 case "l" -> instructions.add(MoveDirection.LEFT);
                 case "r" -> instructions.add(MoveDirection.RIGHT);
-                default -> throw new IllegalArgumentException(arg + " is not a valid argument");
+                default -> throw new IllegalArgumentException(arg + "must be either f, b, l, r");
                 }
             }
         return instructions;
