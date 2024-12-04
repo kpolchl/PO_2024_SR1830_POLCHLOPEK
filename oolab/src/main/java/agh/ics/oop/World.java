@@ -1,6 +1,7 @@
 package agh.ics.oop;
 
 import agh.ics.oop.model.*;
+import javafx.application.Application;
 
 import java.util.List;
 import java.net.NoRouteToHostException;
@@ -23,10 +24,12 @@ public class World {
         Simulation recSimulation = new Simulation(positions, directions, grassWorld);
         Simulation grassSimulation = new Simulation(positions, directions, recWorld);
 
-        SimulationEngine simEng = new SimulationEngine(List.of(recSimulation ));
-        for( int i =0 ;i<1000; i++){
-            simEng.runAsyncInThreadPool();
-        }
+//        SimulationEngine simEng = new SimulationEngine(List.of(recSimulation, grassSimulation ));
+//        for( int i =0 ;i<1000; i++){
+//            simEng.runAsyncInThreadPool();
+//        }
+
+        Application.launch(SimulationApp.class, args);
 
         System.out.println("system zakończył zadanie");
 
