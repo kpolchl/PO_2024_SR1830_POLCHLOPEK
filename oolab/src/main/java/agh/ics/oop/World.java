@@ -2,6 +2,7 @@ package agh.ics.oop;
 
 import agh.ics.oop.model.*;
 import javafx.application.Application;
+import javafx.stage.Stage;
 
 import java.util.List;
 import java.net.NoRouteToHostException;
@@ -18,8 +19,8 @@ public class World {
         List<Vector2d> positions = List.of(new Vector2d(1, 1), new Vector2d(1, 2));
         AbstractWorldMap recWorld = new GrassField(10);
         AbstractWorldMap grassWorld = new RectangularMap(5,5);
-        recWorld.addObserver(new ConsoleMapObserver());
-        grassWorld.addObserver(new ConsoleMapObserver());
+//        recWorld.addObserver(new ConsoleMapObserver());
+//        grassWorld.addObserver(new ConsoleMapObserver());
 
         Simulation recSimulation = new Simulation(positions, directions, grassWorld);
         Simulation grassSimulation = new Simulation(positions, directions, recWorld);
@@ -28,6 +29,7 @@ public class World {
 //        for( int i =0 ;i<1000; i++){
 //            simEng.runAsyncInThreadPool();
 //        }
+
 
         Application.launch(SimulationApp.class, args);
 
