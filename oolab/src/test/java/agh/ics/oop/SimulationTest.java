@@ -108,8 +108,12 @@ class SimulationTest {
         WorldMap map = new RectangularMap(5, 5);
         Simulation simulation = new Simulation(positions, directions,map);
 
-        simulation.run();
-
+        try {
+            simulation.run();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
         assertEquals(simulation.getAnimalList().getFirst().getPosition(), new Vector2d(0,0));
         assertEquals(simulation.getAnimalList().getFirst().getDirection(), MapDirection.NORTH);
     }

@@ -36,11 +36,12 @@ public class Simulation{
         return moves;
     }
 
-    public void run(){
+    public void run() throws InterruptedException {
         int i =0;
         int N = animalList.size();
         for (MoveDirection action : moves) {
             map.move(animalList.get(i), action);
+            Thread.sleep(500);
             i = (i + 1) % N;
         }
     }

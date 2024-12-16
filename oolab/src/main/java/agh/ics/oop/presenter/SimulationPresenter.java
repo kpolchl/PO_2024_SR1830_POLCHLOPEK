@@ -3,11 +3,15 @@ package agh.ics.oop.presenter;
 import agh.ics.oop.OptionsParser;
 import agh.ics.oop.Simulation;
 import agh.ics.oop.model.*;
+import agh.ics.oop.model.util.Boundary;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 
 import java.util.List;
 
@@ -25,20 +29,39 @@ public class SimulationPresenter implements MapChangeListener {
     @FXML
     private TextField input;
 
+    @FXML
+    private GridPane mapGrid;
+
+
     private WorldMap worldMap;
+    private static Vector2d WIDTH;
+    private static Vector2d HEIGHT;
 
     public void setWorldMap(WorldMap map) {
         this.worldMap = map;
+        Boundary newBounds = map.getCurrentBounds();
+        WIDTH = newBounds.BOTTOM_LEFT();
+        HEIGHT = newBounds.TOP_RIGHT();
     }
 
     public void drawMap() {
-        infoLabel.setText(this.worldMap.toString());
+        mapGrid.add();
+
     }
 
     @Override
     public void mapChanged(WorldMap worldMap, String message) {
-        changeData.setText(message);
-        drawMap();
+
+        Platform.runLater(() -> {
+            drawMap();
+            changeData.setText(message);
+        });
+    }
+
+    private void clearGrid() {
+        mapGrid.getChildren().retainAll(mapGrid.getChildren().get(0)); // hack to retain visible grid lines
+        mapGrid.getColumnConstraints().clear();
+        mapGrid.getRowConstraints().clear();
     }
 
     public void onSimulationStartClicked(ActionEvent actionEvent) {
@@ -49,10 +72,12 @@ public class SimulationPresenter implements MapChangeListener {
             List<Vector2d> positions = List.of(new Vector2d(1, 1), new Vector2d(1, 2));
 
             Simulation recSimulation = new Simulation(positions, directions, recWorld);
-            recWorld.addObserver(this);
+            SimulationEngine simulationEngine = new SimulationEngine(List.of(recSimulation));
+            recWorld.addObserver(this); //add observer
             this.setWorldMap(recWorld);
-            recSimulation.run();
-            drawMap();
+            simulationEngine.runSync(); // run simulations
+
+
         } catch (IllegalArgumentException e) {
             changeData.setText("Invalid input: " + e.getMessage());
         }
