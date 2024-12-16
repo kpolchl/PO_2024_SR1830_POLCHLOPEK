@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-import javax.swing.*;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -23,18 +23,6 @@ public class SimulationApp extends Application {
         BorderPane viewRoot = loader.load();
         SimulationPresenter presenter = loader.getController();
         configureStage(primaryStage, viewRoot);
-
-
-        AbstractWorldMap recWorld = new RectangularMap(5,5);
-        List<MoveDirection> directions = null;
-        try {
-            directions = OptionsParser.parse();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        }
-        List<Vector2d> positions = List.of(new Vector2d(1, 1), new Vector2d(1, 2));
-
-        Simulation grassSimulation = new Simulation(positions, directions, recWorld);
 
         primaryStage.show();
     }

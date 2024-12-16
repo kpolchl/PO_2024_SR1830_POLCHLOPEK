@@ -22,8 +22,8 @@ public class World {
 //        recWorld.addObserver(new ConsoleMapObserver());
 //        grassWorld.addObserver(new ConsoleMapObserver());
 
-        Simulation recSimulation = new Simulation(positions, directions, grassWorld);
-        Simulation grassSimulation = new Simulation(positions, directions, recWorld);
+        Simulation recSimulation = new Simulation(positions, directions, recWorld);
+        Simulation grassSimulation = new Simulation(positions, directions, grassWorld);
 
 //        SimulationEngine simEng = new SimulationEngine(List.of(recSimulation, grassSimulation ));
 //        for( int i =0 ;i<1000; i++){
