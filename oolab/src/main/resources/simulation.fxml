@@ -11,11 +11,10 @@
             minHeight="550.0" minWidth="850.0"
             fx:controller="agh.ics.oop.presenter.SimulationPresenter">
     <top>
-        <Label fx:id="changeData" text="pozycje zwierzaków"/>
+        <Label fx:id="changeData" text="Type in animal moves"/>
     </top>
     <center>
-<!--        <Label fx:id="infoLabel" text="All animals will be living here!" textAlignment="CENTER"/>-->
-        <GridPane fx:id="mapGrid"/>
+        <GridPane fx:id="mapGrid" gridLinesVisible="true" alignment="CENTER"/>
     </center>
     <bottom>
         <HBox>
