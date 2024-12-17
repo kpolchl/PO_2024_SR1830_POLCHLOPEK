@@ -107,7 +107,7 @@ public class SimulationPresenter implements MapChangeListener {
                 if (worldMap.isOccupied(pos)) {
                     element = new Label(worldMap.objectAt(pos).toString());
                 } else {
-                    element = new Label(" "); // Puste miejsce
+                    element = new Label(" ");
                 }
 
                 mapGrid.add(element, i - xMin + 1, yMax - j + 1);
