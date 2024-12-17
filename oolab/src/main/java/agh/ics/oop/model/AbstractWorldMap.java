@@ -22,10 +22,10 @@ public abstract class AbstractWorldMap implements WorldMap {
             listener.mapChanged(this, message);
         }
     }
-    public void addObserver(ConsoleMapObserver observer) {
+    public void addObserver(MapChangeListener observer) {
         observers.add(observer);
     }
-    public void removeObserver(ConsoleMapObserver observer) {
+    public void removeObserver(MapChangeListener observer) {
         observers.remove(observer);
     }
 

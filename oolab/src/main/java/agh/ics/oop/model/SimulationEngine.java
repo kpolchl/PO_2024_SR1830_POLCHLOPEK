@@ -16,16 +16,29 @@ public class SimulationEngine implements Runnable {
         this.simulationList = simulationList;
 
     }
-    public void runSync(){
+    public void runSync()  {
         for (Simulation simulation : simulationList) {
-            simulation.run();
+            try {
+                simulation.run();
+            }
+            catch (InterruptedException e) {
+                System.err.println("Simulation interrupted: " + e.getMessage());
+                Thread.currentThread().interrupt();
+            }
         }
     }
 
     public void runAsync() throws InterruptedException {
         List<Thread> asyncSimulations = new ArrayList<>();
         for (Simulation simulation : simulationList) {
-            asyncSimulations.add(new Thread(simulation::run));
+            asyncSimulations.add(new Thread(() -> {
+                try {
+                    simulation.run();
+                } catch (InterruptedException e) {
+                    System.err.println("Simulation interrupted: " + e.getMessage());
+                    Thread.currentThread().interrupt();
+                }
+            }));
         }
         for(Thread run : asyncSimulations) {
             run.start();
@@ -47,7 +60,14 @@ public class SimulationEngine implements Runnable {
         ExecutorService executorService = Executors.newFixedThreadPool(4);
 
         for (Simulation simulation : simulationList) {
-            executorService.submit(simulation::run);
+            executorService.submit(() -> {
+                try {
+                    simulation.run();
+                } catch (InterruptedException e) {
+                    System.err.println("Simulation interrupted: " + e.getMessage());
+                    Thread.currentThread().interrupt();
+                }
+            });
         }
         awaitSimulationsEnd(executorService);
     }
